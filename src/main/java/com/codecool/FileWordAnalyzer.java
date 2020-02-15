@@ -2,29 +2,31 @@ package com.codecool;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class FileWordAnalyzer {
 
     FilePartReader filePartReader;
     List<String> wordsList;
 
-
-    public FileWordAnalyzer(FilePartReader filePartReader) throws IOException {
+    public FileWordAnalyzer(FilePartReader filePartReader) {
         this.filePartReader = filePartReader;
-        this.wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
     }
 
-    public List<String> getWordsOrderedAlphabetically() {
+    public List<String> getWordsOrderedAlphabetically() throws IOException {
 
+        wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
         wordsList.sort(Comparator.comparing(String::toLowerCase));
         return wordsList;
     }
 
-    public List<String> getWordsContainingSubstring (String subString ){
+    public List<String> getWordsContainingSubstring (String subString ) throws IOException {
 
+        wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
 
-
-        return new ArrayList<String>();
+        return wordsList.stream()
+                .filter(word -> word.contains(subString))
+                .collect(Collectors.toList());
     }
 
 

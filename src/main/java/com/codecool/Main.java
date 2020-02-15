@@ -6,9 +6,9 @@ public class Main {
 
     public static void main(String[] args) {
         FilePartReader filePartReader = new FilePartReader();
-        filePartReader.setup("README.txt", 1, 1);
+        filePartReader.setup("target/classes/txtFiles/README.txt", 1, 1);
         try {
-            filePartReader.read();
+            System.out.println(filePartReader.readLines());
         } catch (IOException e) {
             e.printStackTrace();
         }

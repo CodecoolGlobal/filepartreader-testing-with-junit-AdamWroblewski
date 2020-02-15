@@ -1,7 +1,9 @@
 package com.codecool;
 
-import java.io.*;
-import java.util.Scanner;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class FilePartReader {
 
@@ -18,13 +20,11 @@ public class FilePartReader {
     }
 
     public String read() throws IOException {
-        File file = new File(filePath);
-        FileReader fileReader = new FileReader(file);
 
-        Scanner input = new Scanner(file);
-        while (input.hasNextLine())
-            System.out.println(input.nextLine());
+        return Files.readString(Paths.get(filePath), StandardCharsets.US_ASCII);
+    }
 
-        return "";
+    public String readLines() throws IOException {
+        return read();
     }
 }

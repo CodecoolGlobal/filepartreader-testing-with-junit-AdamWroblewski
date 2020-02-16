@@ -11,7 +11,7 @@ public class FilePartReader {
     int fromLine;
     int toLine;
 
-    public void setup(String filePath, int fromLine, int toLine) {
+    public void setup(String filePath, Integer fromLine, Integer toLine) {
         this.filePath = filePath;
         this.fromLine = fromLine;
         this.toLine = toLine;
@@ -24,7 +24,6 @@ public class FilePartReader {
     }
 
     public String read() throws IOException {
-
         return Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
     }
 

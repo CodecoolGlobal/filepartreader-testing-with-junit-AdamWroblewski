@@ -8,13 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class FilePartReaderTest {
     private FilePartReader filePartReader = new FilePartReader();
-    private String filePath = "target/classes/txtFiles/module_oop.md";
-    private Integer fromLine = 1;
-    private Integer toLine = 5;
-
 
     @Test
     public void testSetupMethodParameters() {
+        Integer fromLine = 1;
+        Integer toLine = 5;
+        String filePath = "target/classes/txtFiles/module_oop.md";
         filePartReader.setup(filePath, fromLine, toLine);
 
         assertEquals(String.class, filePath.getClass());

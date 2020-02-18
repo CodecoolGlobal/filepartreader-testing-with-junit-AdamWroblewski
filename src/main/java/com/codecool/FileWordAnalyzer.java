@@ -1,7 +1,10 @@
 package com.codecool;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileWordAnalyzer {
@@ -33,19 +36,17 @@ public class FileWordAnalyzer {
 
         wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
         List<String> palindromes = new ArrayList<>();
-        Stack<Character> stack1 = new Stack<>();
-        StringBuilder reversedWord = new StringBuilder();
 
-        for (String word : wordsList){
-            reversedWord.setLength(0);
-            for (char letter : word.toCharArray()){
-                stack1.push(letter);
-            }
-            while (stack1.size() > 0){
-                reversedWord.append(stack1.pop());
-            }
-            if (word.equals(reversedWord.toString())){
-                palindromes.add(reversedWord.toString());
+        for (String word : wordsList) {
+            for (int currentChar = 0; currentChar < word.length(); currentChar++) {
+                int wordMiddle = (int) Math.ceil(word.length() / 2.0);
+
+                if (word.toLowerCase().charAt(currentChar) != word.toLowerCase().charAt(word.length() - 1 - currentChar)) {
+                    break;
+                }
+                if (currentChar == wordMiddle || wordMiddle == 1) {
+                    palindromes.add(word);
+                }
             }
         }
         return palindromes;

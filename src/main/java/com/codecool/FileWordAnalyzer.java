@@ -5,9 +5,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class FileWordAnalyzer {
-
-    FilePartReader filePartReader;
-    List<String> wordsList;
+    private FilePartReader filePartReader;
+    private List<String> wordsList;
 
     public FileWordAnalyzer(FilePartReader filePartReader) {
         this.filePartReader = filePartReader;
@@ -34,7 +33,6 @@ public class FileWordAnalyzer {
 
         wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
         List<String> palindromes = new ArrayList<>();
-
         Stack<Character> stack1 = new Stack<>();
         StringBuilder reversedWord = new StringBuilder();
 

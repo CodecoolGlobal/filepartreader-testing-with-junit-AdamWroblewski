@@ -3,9 +3,9 @@ package com.codecool;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Comparator;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -15,27 +15,28 @@ public class FileWordAnalyzerTest {
 
     @Test
     public void testIfGetWordsOrderedAlphabeticallySortProperly() throws IOException {
-        filePartReader.setup("target/classes/txtFiles/module_oop.md", 1, 5);
+        filePartReader.setup("target/classes/txtFiles/test.txt", 1, 2);
         FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer(filePartReader);
 
         List<String> actual = fileWordAnalyzer.getWordsOrderedAlphabetically();
+        System.out.println(actual);
 
-        List<String> expected = fileWordAnalyzer.getWordsOrderedAlphabetically();
-        expected.sort(Comparator.comparing(String::toLowerCase));
+        List<String> expected = new ArrayList<>(Arrays.asList("adipiscing", "amet",
+                "consectetur", "convallis", "dolor", "elit", "elit", "erat", "eros",
+                "eu", "euismod", "felis", "id", "ipsum", "libero", "Lorem", "mattis",
+                "Nam", "pulvinar", "quis", "sit", "suscipit", "tristique", "Vivamus"));
 
         assertEquals(expected, actual);
     }
 
     @Test
     public void testIfGetWordsContainingSubstringFilterProperly() throws IOException {
-        filePartReader.setup("target/classes/txtFiles/module_oop.md", 1, 15);
-        String subString = "ti";
+        filePartReader.setup("target/classes/txtFiles/test.txt", 1, 2);
+        String subString = "er";
         FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer(filePartReader);
 
         List<String> actual = fileWordAnalyzer.getWordsContainingSubstring(subString);
-        List<String> expected = actual.stream()
-                .filter(word -> word.contains(subString))
-                .collect(Collectors.toList());
+        List<String> expected = Arrays.asList("libero", "eros", "erat");
 
         assertEquals(expected, actual);
     }

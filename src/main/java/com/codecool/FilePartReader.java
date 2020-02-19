@@ -8,8 +8,8 @@ import java.nio.file.Paths;
 public class FilePartReader {
 
     private String filePath;
-    Integer fromLine;
-    Integer toLine;
+    private Integer fromLine;
+    private Integer toLine;
 
     public void setup(String filePath, Integer fromLine, Integer toLine) {
         this.filePath = filePath;

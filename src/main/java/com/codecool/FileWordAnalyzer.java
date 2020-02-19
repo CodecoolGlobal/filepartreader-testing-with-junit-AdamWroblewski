@@ -20,7 +20,7 @@ public class FileWordAnalyzer {
     public List<String> getWordsOrderedAlphabetically() throws IOException {
 
         wordsList = new ArrayList<>(Arrays.asList(
-                filePartReader.readLines().replaceAll(regex, "").split("\\s")));
+                filePartReader.readLines().replaceAll(regex, "").split("[\\s,]+")));
         wordsList.sort(Comparator.comparing(String::toLowerCase));
         return wordsList;
     }
@@ -31,7 +31,7 @@ public class FileWordAnalyzer {
                 filePartReader.readLines().replaceAll(regex, "").split("\\s")));
 
         return wordsList.stream()
-                .filter(word -> word.contains(subString))
+                .filter(word -> word.toLowerCase().contains(subString))
                 .collect(Collectors.toList());
     }
 
@@ -43,13 +43,13 @@ public class FileWordAnalyzer {
         List<String> palindromes = new ArrayList<>();
 
         for (String word : wordsList) {
-            for (int currentChar = 0; currentChar < word.length(); currentChar++) {
+            for (int currentCharIndex = 0; currentCharIndex < word.length(); currentCharIndex++) {
                 int wordMiddle = (int) Math.ceil(word.length() / 2.0);
 
-                if (word.toLowerCase().charAt(currentChar) != word.toLowerCase().charAt(word.length() - 1 - currentChar)) {
+                if (word.toLowerCase().charAt(currentCharIndex) != word.toLowerCase().charAt(word.length() - 1 - currentCharIndex)) {
                     break;
                 }
-                if (currentChar == wordMiddle || wordMiddle == 1) {
+                if (currentCharIndex == wordMiddle || wordMiddle == 1) {
                     palindromes.add(word);
                 }
             }

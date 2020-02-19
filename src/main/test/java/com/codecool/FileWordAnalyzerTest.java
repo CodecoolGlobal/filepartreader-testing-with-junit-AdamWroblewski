@@ -15,7 +15,7 @@ public class FileWordAnalyzerTest {
 
     @Test
     public void testIfGetWordsOrderedAlphabeticallySortProperly() throws IOException {
-        filePartReader.setup("target/classes/txtFiles/test.txt", 1, 2);
+        filePartReader.setup("target/classes/txtFiles/test.txt", 1, 4);
         FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer(filePartReader);
 
         List<String> actual = fileWordAnalyzer.getWordsOrderedAlphabetically();
@@ -31,12 +31,23 @@ public class FileWordAnalyzerTest {
 
     @Test
     public void testIfGetWordsContainingSubstringFilterProperly() throws IOException {
-        filePartReader.setup("target/classes/txtFiles/test.txt", 1, 2);
+        filePartReader.setup("target/classes/txtFiles/test.txt", 1, 4);
         String subString = "er";
         FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer(filePartReader);
 
         List<String> actual = fileWordAnalyzer.getWordsContainingSubstring(subString);
         List<String> expected = Arrays.asList("libero", "eros", "erat");
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testIfgetStringsWhichPalindromesRetrunPalindromes() throws IOException {
+        filePartReader.setup("target/classes/txtFiles/test-palindromes.txt", 1, 1);
+        FileWordAnalyzer fileWordAnalyzer = new FileWordAnalyzer(filePartReader);
+
+        List<String> actual = fileWordAnalyzer.getStringsWhichPalindromes();
+        List<String> expected = Arrays.asList("Anna", "Civic", "Kayak", "Level", "Madam", "Mom", "Noon");
 
         assertEquals(expected, actual);
     }

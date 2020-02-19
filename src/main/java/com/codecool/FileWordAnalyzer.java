@@ -10,21 +10,25 @@ import java.util.stream.Collectors;
 public class FileWordAnalyzer {
     private FilePartReader filePartReader;
     private List<String> wordsList;
+    private final String regex;
 
     public FileWordAnalyzer(FilePartReader filePartReader) {
         this.filePartReader = filePartReader;
+        regex = "[^a-zA-Z\\s]+";
     }
 
     public List<String> getWordsOrderedAlphabetically() throws IOException {
 
-        wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
+        wordsList = new ArrayList<>(Arrays.asList(
+                filePartReader.readLines().replaceAll(regex, "").split("\\s")));
         wordsList.sort(Comparator.comparing(String::toLowerCase));
         return wordsList;
     }
 
     public List<String> getWordsContainingSubstring(String subString) throws IOException {
 
-        wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
+        wordsList = new ArrayList<>(Arrays.asList(
+                filePartReader.readLines().replaceAll(regex, "").split("\\s")));
 
         return wordsList.stream()
                 .filter(word -> word.contains(subString))
@@ -34,7 +38,8 @@ public class FileWordAnalyzer {
 
     public List<String> getStringsWhichPalindromes() throws IOException {
 
-        wordsList = new ArrayList<>(Arrays.asList(filePartReader.readLines().split("\\s")));
+        wordsList = new ArrayList<>(Arrays.asList(
+                filePartReader.readLines().replaceAll(regex, "").split("\\s")));
         List<String> palindromes = new ArrayList<>();
 
         for (String word : wordsList) {
